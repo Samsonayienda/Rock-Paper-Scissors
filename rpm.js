@@ -7,7 +7,7 @@ function getComputerChoice() {
   const randomIndex = Math.floor(Math.random() * choices.length);
   choices.length[0]= "Rock";
   choices.length[1]= "Paper";
-  choices.length[2]="Scissors";
+  choices.length[2]="Paper";
 
    return choices[randomIndex];
   }

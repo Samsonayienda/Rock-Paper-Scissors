@@ -24,24 +24,7 @@ function getComputerChoice() {
   let rounds = 0;
 
 
-  for(rounds = 1; rounds <=5; rounds++){
-      let pick = prompt("Enter your option: ")
-      console.log(pick);
-      const selectedString = getComputerChoice();
-      console.log(selectedString);
 
-  if (pick == "Rock" && selectedString =="Scissors" || pick == "Scissors" && selectedString == "Paper" || pick == "Paper" && selectedString == "Rock"){
-   userWins == userWins + 1;
-  console.log("Congrats! You beat the computer")
-  
-  }else if (pick == selectedString){
-    console.log("You tie");
-  }else{
-    compWins == compWins+1;
-    console.log("Congrats! You beat the human")
-   
-  }
-}
 
 if (rounds == 5){
   console.log("Game Over")

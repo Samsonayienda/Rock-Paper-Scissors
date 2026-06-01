@@ -1,58 +1,67 @@
-
+function playerSelection(){
+document.getElementById("rock").addEventListener("click", (Rock) => playRound("rock"));
+document.getElementById("paper").addEventListener("click", () => playRound("paper"));
+document.getElementById("scissors").addEventListener("click", () => playRound("scissors"));
+}
 
 function getComputerChoice() {
 
   const choices = ["Rock", "Paper", "Scissors"];
    
   const randomIndex = Math.floor(Math.random() * choices.length);
-  choices.length[0]= "Rock";
-  choices.length[1]= "Paper";
-  choices.length[2]="Scissors";
 
    return choices[randomIndex];
   }
   
-  // const selectedString = getComputerChoice();
-  // console.log(selectedString);
 
 
-  // let pick = prompt("Enter your option: ")
-  // console.log(pick);
-
-  let userWins = 0;
-  let compWins = 0;
+  let playerScore = 0;
+  let computerScore = 0;
   let rounds = 0;
 
+  const resultsDiv = document.getElementById("results")
+  const roundResult = document.getElementById("round-result")
+  const scoreDisplay = document.querySelector("#score")
 
-  for(rounds = 1; rounds <=5; rounds++){
-      let pick = prompt("Enter your option: ")
-      console.log(pick);
-      const selectedString = getComputerChoice();
-      console.log(selectedString);
+function playRound (playerSelection) {
+  const computerSelection = getComputerChoice()
+  let result = "";
 
-  if (pick == "Rock" && selectedString =="Scissors" || pick == "Scissors" && selectedString == "Paper" || pick == "Paper" && selectedString == "Rock"){
-   userWins == userWins + 1;
-  console.log("Congrats! You beat the computer")
-  
-  }else if (pick == selectedString){
-    console.log("You tie");
-  }else{
-    compWins == compWins+1;
-    console.log("Congrats! You beat the human")
-   
-  }
-}
+  if (playerSelection === computerSelection){
+    result = `Tie, both chose ${playerSelection}`;
 
-if (rounds == 5){
-  console.log("Game Over")
-}
-else if (rounds == 5 && userWins > compWins){
-  console.log("Game Over, User Wins")
-
+  }else if (
+    (playerSelection === "rock" && computerSelection === "Scissors") ||
+    (playerSelection === "scissors" && computerSelection === "Paper") ||
+    (playerSelection === "paper" && computerSelection === "Rock")
+  ){
+  playerScore++;
+  result = `You win ${playerScore} beats ${computerScore}`
 }else {
-  console.log("Game Over! Sam wewe uko down man")
+  computerScore++;
+  result = `You lose ${computerScore} beats ${playerScore}`
 }
 
+updateUI(result)
+}
 
+//Updates UI
+function updateUI(message) {
+    roundResult.textContent = message;
+    scoreDisplay.textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
 
+    
+    if (playerScore === 5 || computerScore === 5) {
+        const winner = playerScore === 5 ? "Player" : "Computer";
+        roundResult.textContent = `GAME OVER! ${winner} wins ${playerScore}-${computerScore}`;
+        playerScore = 0;
+        computerScore = 0;
+    }
+}
+// function playerSelection(){
+// document.getElementById(".rock").addEventListener("click", (Rock) => playRound("rock"));
+// document.getElementById(".paper").addEventListener("click", () => playRound("paper"));
+// document.getElementById(".scissors").addEventListener("click", () => playRound("scissors"));
+// }
 
+playerSelection();
